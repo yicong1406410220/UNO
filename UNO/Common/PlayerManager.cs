@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UNO.Common;
+using UNO.Net;
+using UNO.Net.Protocol;
 
 namespace UNO.Common
 {
@@ -37,6 +39,14 @@ namespace UNO.Common
 		public static void RemovePlayer(string id)
 		{
 			players.Remove(id);
+		}
+
+		public void Send(ProtocolBase obj)
+		{
+			foreach (var item in players)
+			{
+				item.Value.Send(obj);
+			}
 		}
 	}
 }

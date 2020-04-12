@@ -14,6 +14,8 @@ namespace UNO.Common
         public string ID = "";
         //玩家用来登录的id
         public string id = "";
+        //房间号id
+        public string roomId = "";
         //用户状态
         public UserStatus userStatus = UserStatus.InHall;
         public enum UserStatus

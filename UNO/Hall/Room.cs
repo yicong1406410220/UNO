@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UNO.Common;
+using UNO.Net;
+using UNO.Net.Protocol;
 
 namespace UNO.Hall
 {
@@ -24,6 +26,13 @@ namespace UNO.Hall
         {
             Ready,   //准备
             Battle,   //战斗
+        }
+
+        public enum UserType
+        {
+            All,
+            Look,   //旁观
+            Game,   //战斗
         }
 
         public bool Join(string id, string pw)
@@ -54,6 +63,23 @@ namespace UNO.Hall
                 return true;
             }
             return false;
+        }
+        public void Send(ProtocolBase obj, UserType userType)
+        {
+            if(userType == UserType.All || userType == UserType.Game)
+            {
+                foreach (KeyValuePair<string, Player> item in players)
+                {
+                    item.Value.Send(obj);
+                }
+            }
+            if (userType == UserType.All || userType == UserType.Look)
+            {
+                foreach (KeyValuePair<string, Player> item in Lookplayers)
+                {
+                    item.Value.Send(obj);
+                }
+            }
         }
     }
 }

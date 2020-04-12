@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UNO.Net.Protocol;
 
 namespace UNO.Hall
 {
@@ -43,5 +44,12 @@ namespace UNO.Hall
 			rooms.Remove(id);
 		}
 
+		public void Send(ProtocolBase obj)
+		{
+			foreach (var item in rooms)
+			{
+				item.Value.Send(obj);
+			}
+		}
 	}
 }
